@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
-import 'package:mir_e_platform/Providers/fake_apiProvider/api_provider.dart';
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:provider/provider.dart';
+import 'Providers/News_provider/News_provider.dart';
 import 'firebase_options.dart';
 
 final scaffoldMessengerKey=GlobalKey<ScaffoldMessengerState>();
@@ -29,9 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => MyAuthProvider()),
-        ChangeNotifierProvider(create: (context) => ApiProvider()),
+        ChangeNotifierProvider(create: (_) => NewsProvider()),
+        ChangeNotifierProvider(create: (_) => MyAuthProvider()),
       ],
+
       child: MaterialApp(
         scaffoldMessengerKey: scaffoldMessengerKey,
         navigatorKey: navigatorKey,

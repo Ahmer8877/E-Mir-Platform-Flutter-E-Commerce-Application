@@ -2,7 +2,6 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
-import 'package:mir_e_platform/Providers/fake_apiProvider/api_provider.dart';
 import 'package:provider/provider.dart';
 import '../Home_Screen/Home_Screen.dart';
 import '../Profile_Screen/Profile_Screen.dart';
@@ -73,23 +72,18 @@ class _MainScreenState extends State<MainScreen> {
 
         //set the bottom navigation with smooth animation(code)
 
-        bottomNavigationBar: Consumer<ApiProvider>(
-          builder: (context,provider,child) {
-            return AnimatedBottomNavigationBar(
-              icons: iconlist,iconSize: 30,
-              activeIndex: currentIndex,
-              notchSmoothness: NotchSmoothness.smoothEdge,
-              activeColor: Colors.black,
-              inactiveColor: Colors.orange.withAlpha(250),
-              gapLocation: GapLocation.none,
-              onTap: (value){
-                setState(() {
-                  currentIndex=value;
-                });
-                provider.getData();
-              },
-            );
-          }
+        bottomNavigationBar: AnimatedBottomNavigationBar(
+          icons: iconlist,iconSize: 30,
+          activeIndex: currentIndex,
+          notchSmoothness: NotchSmoothness.smoothEdge,
+          activeColor: Colors.black,
+          inactiveColor: Colors.orange.withAlpha(250),
+          gapLocation: GapLocation.none,
+          onTap: (value){
+            setState(() {
+              currentIndex=value;
+            });
+          },
         ),
 
         //set the drawer code
