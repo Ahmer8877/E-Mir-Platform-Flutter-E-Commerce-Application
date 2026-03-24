@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import '../../models/News_model.dart';
 
 class NewsProvider extends ChangeNotifier {
+
+  //news Model empty list
   List<NewsModel> _newsList = [];
+  //fake loading
   bool _isLoading = false;
+  //error msg
   String _errorMessage = '';
 
   List<NewsModel> get newsList => _newsList;
@@ -78,6 +82,7 @@ class NewsProvider extends ChangeNotifier {
     },
   ];
 
+  //create func. to fetch data
   Future<void> fetchNews() async {
     _isLoading = true;
     _errorMessage = '';
@@ -90,9 +95,10 @@ class NewsProvider extends ChangeNotifier {
       _newsList = _fakeData.map((item) => NewsModel.fromJson(item)).toList();
     } catch (e) {
       _errorMessage = 'Something went wrong ,Try Again';
-    }
+    }finally{
+      _isLoading = false;
 
-    _isLoading = false;
+    }
     notifyListeners();
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
 import 'package:provider/provider.dart';
+import '../../Providers/profile_provider/profile_provider.dart';
 import '../Home_Screen/Home_Screen.dart';
 import '../Profile_Screen/Profile_Screen.dart';
 import '../mNews_Screen/mNews_Screen.dart';
@@ -145,15 +146,49 @@ class _MainScreenState extends State<MainScreen> {
                 },
               ),
 
-              SizedBox(height: 400,),
+              SizedBox(height: 20,),
 
-              //logout button code
+              //About section
+
+              ListTile(
+                title: Text('About',style: TextStyle(fontWeight: FontWeight.bold),),
+                subtitle: Text('    version 1.00v'),
+              ),
+
+              SizedBox(height: 330,),
+
+
+              //logout button code with dialog box
 
               Consumer<MyAuthProvider>(
                 builder: (context,provider,child) {
-                  return ElevatedButton.icon(
-                      onPressed: (){
-                        provider.logout();
+                  return OutlinedButton.icon(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) =>
+                                AlertDialog(
+                                  title: Text('SignOut'),
+                                  content: Text('Are you sure?'),
+
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () async {
+                                          provider.logout();
+                                          await context.read<ProfileProvider>().clearUserData();
+
+                                        },
+                                        child: Text('Yes')
+                                    ),
+                                    TextButton(
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('No')
+                                    ),
+                                  ],
+                                )
+                        );
                       },
                       label: Text('LogOut'),
                       icon: Icon(Icons.login)

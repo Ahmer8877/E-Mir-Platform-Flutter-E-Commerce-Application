@@ -3,7 +3,6 @@ import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:provider/provider.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -107,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   decoration: InputDecoration(
                                       hintText: 'Enter the Password',
                                       border: InputBorder.none,
-                                      prefixIcon: Icon(Icons.password,color: Colors.black,),
+                                      prefixIcon: Icon(Icons.lock,color: Colors.black,),
                                       suffixIcon: IconButton(
                                           onPressed: (){
                                             setState(() {
@@ -142,10 +141,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             builder: (context,provider,child) {
                               return provider.loading? Center(child: CircularProgressIndicator(),):
                               ElevatedButton(
-                                  onPressed: (){
+                                  onPressed: () async{
                                     if(formkey.currentState!.validate()) {
-                                      provider.login(Email.text, Password.text);
+
+                                      provider.login(Email.text.trim(), Password.text.trim());
                                     }
+
                                   },
                                   child: Text('Login',style: TextStyle(fontWeight: FontWeight.bold),)
                               );

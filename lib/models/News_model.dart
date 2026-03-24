@@ -15,6 +15,8 @@ class NewsModel {
     required this.publishedAt,
   });
 
+  //factory contractor ,convert to json to map format
+  
   factory NewsModel.fromJson(Map<String, dynamic> json) {
     return NewsModel(
       id: json['id'],

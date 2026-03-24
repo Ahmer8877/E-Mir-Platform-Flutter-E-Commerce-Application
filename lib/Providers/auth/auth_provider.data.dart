@@ -4,39 +4,77 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mir_e_platform/main.dart';
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:mir_e_platform/utils/show_msg.dart';
+import 'package:mir_e_platform/utils/showmsg_failure.dart';
+import 'package:provider/provider.dart';
+
+import '../profile_provider/profile_provider.dart';
+
 
 class MyAuthProvider with ChangeNotifier{
+
+  //firebase instance
+
   FirebaseAuth auth=FirebaseAuth.instance;
+
+  //editer controller to use clear text
+
   TextEditingController emailController = TextEditingController();
+
+  //fake loading
+
   bool loading=false;
 
 
-  //create the func. for login user with passw and email
+  // provider.login(Email.text, Password.text);
 
-  void login(String email,String password) async{
-    try{
+  void login(String Email,String password) async{
+
+
+    try {
       _loading(true);
-      await auth.signInWithEmailAndPassword(email: email.trim(), password: password.trim());
-      Navigator.pushNamedAndRemoveUntil(navigatorKey.currentContext!, RouteHelper.Main,(value) => false);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email:Email.trim() , password: password.trim()
+
+      );
+
+      await navigatorKey.currentContext!.read<ProfileProvider>().loadUserFromPrefs();
 
       showMsg('Login Successful');
-    }catch(e){
-      showMsg(e.toString());
+      Navigator.pushNamedAndRemoveUntil(
+          navigatorKey.currentContext!, RouteHelper.Main, (value) => false);
+
+    } catch (e) {
+      showMsgFailure(e.toString());
     }finally{
       _loading(false);
     }
   }
 
-  //create func. for user register accounts code
+  // provider.register(Name.text, Email.text, Password.text);
 
-  void register(String name,String email,String password) async{
-    try{
-      _loading(true);
-      await auth.createUserWithEmailAndPassword(email: email.trim(), password: password.trim());
+  void register(String name,String Email,String password) async{
+
+    try {
+     _loading(true);
+      final credential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+        email: Email.trim(),
+        password: password.trim(),
+      );
+
+      // check uid in console
+      print('UID: ${credential.user?.uid}');
+
+      await navigatorKey.currentContext!.read<ProfileProvider>().saveUserToPrefs(
+        name: name.trim(),
+        email: Email.trim(),
+        password: password.trim(),
+      );
+
+      showMsg('Registration Successful, login now');
       Navigator.pushReplacementNamed(navigatorKey.currentContext!, RouteHelper.Login);
-      showMsg('Registration Successful , login now');
-    }catch(e){
-      showMsg(e.toString());
+
+    } catch (e) {
+      showMsgFailure(e.toString());
     }finally{
       _loading(false);
     }
@@ -52,7 +90,7 @@ class MyAuthProvider with ChangeNotifier{
       emailController.clear();
       showMsg('Please check your Email');
     }catch(e){
-      showMsg(e.toString());
+      showMsgFailure(e.toString());
     }finally{
       _loading(false);
     }
@@ -66,7 +104,7 @@ class MyAuthProvider with ChangeNotifier{
       Navigator.pushNamedAndRemoveUntil(navigatorKey.currentContext!, RouteHelper.Login, (value) =>false);
       showMsg('LogOut Successful');
     }catch(e){
-      showMsg(e.toString());
+      showMsgFailure(e.toString());
     }
   }
 
@@ -92,7 +130,7 @@ class MyAuthProvider with ChangeNotifier{
       showMsg('Authenticate Successful');
 
     }catch(e){
-      showMsg(e.toString());
+      showMsgFailure(e.toString());
     }finally{
      _loading(false);
     }

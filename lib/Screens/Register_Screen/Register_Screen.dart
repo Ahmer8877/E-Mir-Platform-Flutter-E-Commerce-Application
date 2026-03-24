@@ -16,6 +16,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController Name=TextEditingController();
   TextEditingController Password=TextEditingController();
   GlobalKey<FormState> formkey=GlobalKey<FormState>();
+  bool isloading=false;
   bool isHidden=true;
 
 
@@ -133,7 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 decoration: InputDecoration(
                                     hintText: 'Enter the Password',
                                     border: InputBorder.none,
-                                    prefixIcon: Icon(Icons.password,color: Colors.black,),
+                                    prefixIcon: Icon(Icons.lock,color: Colors.black,),
                                     suffixIcon: IconButton(
                                         onPressed: (){
                                           setState(() {
@@ -167,7 +168,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ElevatedButton(
                                 onPressed: ()async {
                                   if(formkey.currentState!.validate()) {
-                                    provider.register(Name.text, Email.text, Password.text);
+
+                                    provider.register(Name.text.trim(), Email.text.trim(), Password.text.trim());
                                   }
 
                                 },

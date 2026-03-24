@@ -48,6 +48,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
               ),
 
               SizedBox(height: 5,),
+
               //Some user information text
 
               Center(child: Text('Please Enter valid Email !',

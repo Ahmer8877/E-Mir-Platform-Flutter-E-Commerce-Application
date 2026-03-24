@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.circular(2),
-                          color: currentIndex==index? CupertinoColors.inactiveGray : CupertinoColors.lightBackgroundGray
+                          color: currentIndex==index?  Colors.blue : CupertinoColors.lightBackgroundGray
                       ), duration: Duration(milliseconds: 10),
                     ),
                 ],
