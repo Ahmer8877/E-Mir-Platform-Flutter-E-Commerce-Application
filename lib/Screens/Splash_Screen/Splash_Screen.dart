@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
 
                     //Random splash screen icon with center
-                    Center(child: Icon(Icons.flutter_dash_outlined,size: 100,color: Colors.blue.withAlpha(250),)),
+                    Center(child: Image.asset('assets/icons/img.png')),
 
                     //Create the random text for down the icon
                     const Text('Hye Bunko',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),

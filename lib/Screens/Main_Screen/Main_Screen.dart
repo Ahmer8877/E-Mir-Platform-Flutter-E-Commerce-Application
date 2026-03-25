@@ -62,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
           automaticallyImplyLeading: false,
           leading: Padding(
             padding: const EdgeInsets.only(left: 18),
-            child: Icon(Icons.flutter_dash_outlined,color: Colors.blue.withAlpha(250),size: 45,),
+            child: Image.asset('assets/icons/img.png'),
           ),
           backgroundColor: Colors.white,
           centerTitle: true,
@@ -95,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
 
               //splash screen icon in center drawer
 
-              Center(child: Icon(Icons.flutter_dash_outlined,size: 150,color: Colors.blue.withAlpha(250),)),
+              Center(child: Image.asset('assets/icons/img.png')),
 
               SizedBox(height: 15,),
 
