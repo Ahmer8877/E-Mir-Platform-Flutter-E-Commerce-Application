@@ -42,6 +42,8 @@ class MyAuthProvider with ChangeNotifier{
       Navigator.pushNamedAndRemoveUntil(
           navigatorKey.currentContext!, RouteHelper.Main, (value) => false);
 
+    }on FirebaseAuthException catch(e){
+      showMsgFailure(e.toString());
     } catch (e) {
       showMsgFailure(e.toString());
     }finally{
@@ -73,7 +75,9 @@ class MyAuthProvider with ChangeNotifier{
       showMsg('Registration Successful, login now');
       Navigator.pushReplacementNamed(navigatorKey.currentContext!, RouteHelper.Login);
 
-    } catch (e) {
+    } on FirebaseAuthException catch(e){
+      showMsgFailure(e.toString());
+    }catch (e) {
       showMsgFailure(e.toString());
     }finally{
       _loading(false);
@@ -103,6 +107,8 @@ class MyAuthProvider with ChangeNotifier{
       await auth.signOut();
       Navigator.pushNamedAndRemoveUntil(navigatorKey.currentContext!, RouteHelper.Login, (value) =>false);
       showMsg('LogOut Successful');
+    }on FirebaseAuthException catch(e){
+      showMsgFailure(e.toString());
     }catch(e){
       showMsgFailure(e.toString());
     }
@@ -129,6 +135,8 @@ class MyAuthProvider with ChangeNotifier{
       Navigator.pushNamedAndRemoveUntil(navigatorKey.currentContext!, RouteHelper.Main, (value) => false);
       showMsg('Authenticate Successful');
 
+    }on FirebaseAuthException catch(e){
+      showMsgFailure(e.toString());
     }catch(e){
       showMsgFailure(e.toString());
     }finally{

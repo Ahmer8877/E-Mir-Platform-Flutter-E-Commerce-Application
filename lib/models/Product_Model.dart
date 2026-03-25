@@ -1,28 +1,23 @@
 class ProductModel {
   final int id;
   final String title;
-  final String description;
   final double price;
+  final double originalPrice;
   final String image;
   final String category;
+  final double rating;
+  final int reviews;
+  bool isWishlisted;
 
   ProductModel({
     required this.id,
     required this.title,
-    required this.description,
     required this.price,
+    required this.originalPrice,
     required this.image,
     required this.category,
+    required this.rating,
+    required this.reviews,
+    this.isWishlisted = false,
   });
-
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      price: (json['price'] as num).toDouble(),
-      image: json['thumbnail'], // ✅ DummyJSON mein 'thumbnail' hota hai
-      category: json['category'],
-    );
-  }
 }

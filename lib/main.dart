@@ -5,6 +5,7 @@ import 'package:mir_e_platform/Providers/profile_provider/profile_provider.dart'
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:provider/provider.dart';
 import 'Providers/News_provider/News_provider.dart';
+import 'Providers/product_provider/product_provider.dart';
 import 'firebase_options.dart';
 
 //create scaffold messenger key to manage messenger in non-widgets objects
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => NewsProvider()),
         ChangeNotifierProvider(create: (_) => MyAuthProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
       ],
 
       child: MaterialApp(
