@@ -1,5 +1,5 @@
 // //products details and the use for grid view widget
-//
+//@mipmap/img
 // GridView.count(
 // crossAxisSpacing: 5,
 // mainAxisSpacing: 5,

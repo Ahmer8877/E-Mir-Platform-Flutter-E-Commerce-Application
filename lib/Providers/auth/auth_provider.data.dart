@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mir_e_platform/Providers/localNotification_provider/local_notification.dart';
 import 'package:mir_e_platform/main.dart';
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:mir_e_platform/utils/show_msg.dart';
@@ -41,6 +42,7 @@ class MyAuthProvider with ChangeNotifier{
       showMsg('Login Successful');
       Navigator.pushNamedAndRemoveUntil(
           navigatorKey.currentContext!, RouteHelper.Main, (value) => false);
+      NotificationHelper.show();
 
     }on FirebaseAuthException catch(e){
       showMsgFailure(e.toString());

@@ -145,6 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     if(formkey.currentState!.validate()) {
 
                                       provider.login(Email.text.trim(), Password.text.trim());
+
                                     }
 
                                   },

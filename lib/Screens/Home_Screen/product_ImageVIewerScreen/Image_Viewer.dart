@@ -11,7 +11,6 @@ class ImageViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CupertinoColors.lightBackgroundGray,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: CupertinoColors.black),
         title: Text('Product_Details'),

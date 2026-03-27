@@ -2,6 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
+import 'package:mir_e_platform/Providers/darkTheme_provider/dark_theme.dart';
 import 'package:provider/provider.dart';
 import '../../Providers/profile_provider/profile_provider.dart';
 import '../Home_Screen/Home_Screen.dart';
@@ -17,6 +18,9 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
+  //for dark btn switch
+
+bool isSwitch=false;
 
   //create int index for screen management
 
@@ -54,18 +58,13 @@ class _MainScreenState extends State<MainScreen> {
     //this is the root of application and provide interface
     return Scaffold(
         key: globalKey,
-        backgroundColor: Colors.white,
-
         //set the app bar(code)
 
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 18),
-            child: Image.asset('assets/icons/img.png'),
-          ),
-          backgroundColor: Colors.white,
+          leading: Image.asset('assets/icons/logo.png',fit: BoxFit.cover),
           centerTitle: true,
+          backgroundColor: Colors.white,
           title: Text(pageName[currentIndex],
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
@@ -95,7 +94,7 @@ class _MainScreenState extends State<MainScreen> {
 
               //splash screen icon in center drawer
 
-              Center(child: Image.asset('assets/icons/img.png')),
+              Center(child: Image.asset('assets/icons/logo.png')),
 
               SizedBox(height: 15,),
 
@@ -147,6 +146,62 @@ class _MainScreenState extends State<MainScreen> {
               ),
 
               SizedBox(height: 20,),
+
+              //dark theme button
+
+              Row(
+                spacing: 3,
+                children: [
+
+                  //theme icon with padding
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Icon(CupertinoIcons.paintbrush_fill,color: Colors.green,),
+                  ),
+                  //text
+
+                  Text('Themes',style: TextStyle(fontSize: 20),),
+
+                  //arrow text
+
+                  Text('=>',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.deepOrange),),
+
+                  SizedBox(width: 70,),
+
+                  //dropDown btn
+
+                  Consumer<ThemeProvider>(
+                    builder: (context,provider,child) {
+                      return DropdownButton<ThemeMode>(
+                        value: provider.themeMode,
+                          onChanged: (value){
+                          provider.switchTheme(value!);
+                          },
+
+                        items: [
+                          DropdownMenuItem(
+                              value: ThemeMode.system,
+                              child: Text('System',style: TextStyle(fontWeight: FontWeight.bold),),
+                          ),
+                          DropdownMenuItem(
+                            value: ThemeMode.light,
+                            child: Text('Light',style: TextStyle(fontWeight: FontWeight.bold),),
+                            onTap: (){},
+                          ),
+                          DropdownMenuItem(
+                            value: ThemeMode.dark,
+                            child: Text('Dark',style: TextStyle(fontWeight: FontWeight.bold),),
+                            onTap: (){},
+                          ),
+                        ]
+                      );
+                    }
+                  )
+                ],
+              ),
+
+              SizedBox(height: 30,),
 
               //About section
 
