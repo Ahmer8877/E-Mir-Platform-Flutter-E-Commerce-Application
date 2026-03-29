@@ -40,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CupertinoColors.white,
         body: Center(
             child:
             //manged widgets with stack
@@ -51,11 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
 
                     //Random splash screen icon with center
-                    Center(child: Image.asset('assets/icons/logo.png'),),
-
-                    //Create the random text for down the icon
-                    const Text('Hye Bunko',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-
+                    Center(child: Image.asset('assets/icons/Mlogo.gif'),),
 
                   ],
                 ),

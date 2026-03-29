@@ -1,12 +1,14 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class NotificationHelper {
+class NotificationHelper with ChangeNotifier {
 
   static final notification = FlutterLocalNotificationsPlugin();
 
   static  Future<void> initialize() async {
     AndroidInitializationSettings android = AndroidInitializationSettings(
-        '@mipmap/img');
+        '@mipmap/logo');
     DarwinInitializationSettings ios = DarwinInitializationSettings();
 
     InitializationSettings initializationSettings = InitializationSettings(
@@ -14,9 +16,16 @@ class NotificationHelper {
         iOS: ios
     );
     await notification.initialize(settings: initializationSettings);
+
+    if(Platform.isAndroid){
+      await notification.resolvePlatformSpecificImplementation
+      <AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
+    }else{
+      await notification.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions();
+    }
   }
 
-  static Future<void> show() async{
+   Future<void> show() async{
 
     AndroidNotificationDetails android=AndroidNotificationDetails('channelId', 'imp.. channel');
     DarwinNotificationDetails ios=DarwinNotificationDetails();

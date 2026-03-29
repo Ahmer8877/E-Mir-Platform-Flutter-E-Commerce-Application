@@ -3,6 +3,8 @@ import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:provider/provider.dart';
 
+import '../../Providers/localNotification_provider/local_notification.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -22,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-
+      backgroundColor: Colors.white,
       body:
           Stack(
             children: [
@@ -33,7 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 30,),
                       //icon for login screen
 
-                      Center(child: Icon(Icons.flutter_dash_outlined,size: 150,color: Colors.blue.withAlpha(250),)
+                      Center(
+                          child: Image.asset('assets/icons/Mlogo.gif',height: 200,width: 200,)
                       ),
                     ],
                   ),
@@ -137,15 +140,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           //create the login btn for login
 
-                          Consumer<MyAuthProvider>(
-                            builder: (context,provider,child) {
+                          Consumer2<MyAuthProvider,NotificationHelper>(
+                            builder: (context,provider,notification,child) {
                               return provider.loading? Center(child: CircularProgressIndicator(),):
                               ElevatedButton(
                                   onPressed: () async{
                                     if(formkey.currentState!.validate()) {
 
                                       provider.login(Email.text.trim(), Password.text.trim());
-
+                                      notification.show();
                                     }
 
                                   },

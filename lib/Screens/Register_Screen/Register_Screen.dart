@@ -25,6 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return
       Scaffold(
+        backgroundColor: Colors.white,
         body:
         Stack(
           children: [
@@ -35,8 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(height: 30,),
                     //icon for login screen
 
-                    Center(child: Icon(Icons.flutter_dash_outlined,size: 150,color: Colors.blue.withAlpha(250),)
-                    ),
+                    Center(child: Image.asset('assets/icons/Mlogo.gif',height: 200,width: 200,))
                   ],
                 ),
 

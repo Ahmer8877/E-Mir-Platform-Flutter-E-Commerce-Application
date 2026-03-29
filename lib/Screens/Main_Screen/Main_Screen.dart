@@ -62,7 +62,7 @@ bool isSwitch=false;
 
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          leading: Image.asset('assets/icons/logo.png',fit: BoxFit.cover),
+          leading: Image.asset('assets/icons/Mlogo.gif',fit: BoxFit.cover),
           centerTitle: true,
           backgroundColor: Colors.white,
           title: Text(pageName[currentIndex],
@@ -94,7 +94,7 @@ bool isSwitch=false;
 
               //splash screen icon in center drawer
 
-              Center(child: Image.asset('assets/icons/logo.png')),
+              Center(child: Image.asset('assets/icons/Mlogo.gif')),
 
               SizedBox(height: 15,),
 
