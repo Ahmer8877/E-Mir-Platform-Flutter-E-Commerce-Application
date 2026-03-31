@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
 import 'package:mir_e_platform/Providers/darkTheme_provider/dark_theme.dart';
+import 'package:mir_e_platform/Screens/Cart_Screen/Cart_Screen.dart';
 import 'package:provider/provider.dart';
 import '../../Providers/profile_provider/profile_provider.dart';
 import '../Home_Screen/Home_Screen.dart';
@@ -18,9 +19,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
-  //for dark btn switch
-
-bool isSwitch=false;
 
   //create int index for screen management
 
@@ -36,6 +34,7 @@ bool isSwitch=false;
     CupertinoIcons.home,
     CupertinoIcons.news,
     CupertinoIcons.profile_circled,
+    CupertinoIcons.shopping_cart,
 
   ];
 
@@ -45,11 +44,12 @@ bool isSwitch=false;
     "Home",
     "M.News",
     "Profile",
+    "Cart"
   ];
 
   //create the all widget list in app
 
-  final List<Widget> widgets=[HomeScreen(),mNewsScreen(),ProfileScreen(),];
+  final List<Widget> widgets=[HomeScreen(),mNewsScreen(),ProfileScreen(),CartScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +61,10 @@ bool isSwitch=false;
         //set the app bar(code)
 
         appBar: AppBar(
+          backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           leading: Image.asset('assets/icons/Mlogo.gif',fit: BoxFit.cover),
           centerTitle: true,
-          backgroundColor: Colors.white,
           title: Text(pageName[currentIndex],
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
@@ -72,23 +72,29 @@ bool isSwitch=false;
 
         //set the bottom navigation with smooth animation(code)
 
-        bottomNavigationBar: AnimatedBottomNavigationBar(
-          icons: iconlist,iconSize: 30,
-          activeIndex: currentIndex,
-          notchSmoothness: NotchSmoothness.smoothEdge,
-          activeColor: Colors.black,
-          inactiveColor: Colors.orange.withAlpha(250),
-          gapLocation: GapLocation.none,
-          onTap: (value){
-            setState(() {
-              currentIndex=value;
-            });
-          },
+        bottomNavigationBar: Container(
+          margin: EdgeInsets.all(10),
+          height: 65,
+          width: 65,
+          child: AnimatedBottomNavigationBar(
+            icons: iconlist,iconSize: 30,
+            activeIndex: currentIndex,
+            notchSmoothness: NotchSmoothness.smoothEdge,
+            activeColor: Colors.black,
+            inactiveColor: Colors.orange.withAlpha(250),
+            gapLocation: GapLocation.none,
+            onTap: (value){
+              setState(() {
+                currentIndex=value;
+              });
+            },
+          ),
         ),
 
         //set the drawer code
 
         endDrawer: Drawer(
+          backgroundColor: Colors.white,
           child: ListView(
             children: [
 
@@ -181,13 +187,13 @@ bool isSwitch=false;
 
                         items: [
                           DropdownMenuItem(
-                              value: ThemeMode.system,
-                              child: Text('System',style: TextStyle(fontWeight: FontWeight.bold),),
-                          ),
-                          DropdownMenuItem(
                             value: ThemeMode.light,
                             child: Text('Light',style: TextStyle(fontWeight: FontWeight.bold),),
                             onTap: (){},
+                          ),
+                          DropdownMenuItem(
+                            value: ThemeMode.system,
+                            child: Text('System',style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
                           DropdownMenuItem(
                             value: ThemeMode.dark,

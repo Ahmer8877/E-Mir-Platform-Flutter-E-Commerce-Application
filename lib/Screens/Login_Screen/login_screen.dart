@@ -3,7 +3,6 @@ import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:provider/provider.dart';
 
-import '../../Providers/localNotification_provider/local_notification.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -58,7 +57,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
 
-                  SizedBox(height: 30,),
                   //create the text form field for email and password with loading
 
                   Form(
@@ -140,15 +138,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           //create the login btn for login
 
-                          Consumer2<MyAuthProvider,NotificationHelper>(
-                            builder: (context,provider,notification,child) {
+                          Consumer<MyAuthProvider>(
+                            builder: (context,provider,child) {
                               return provider.loading? Center(child: CircularProgressIndicator(),):
                               ElevatedButton(
                                   onPressed: () async{
                                     if(formkey.currentState!.validate()) {
 
-                                      provider.login(Email.text.trim(), Password.text.trim());
-                                      notification.show();
+                                      provider.login(Email.text.trim(), Password.text.trim(),);
                                     }
 
                                   },
@@ -274,6 +271,62 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+
+              //shirt 1
+              Positioned(
+                left: 240,
+                top: -20,
+                bottom: 600,
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/icons/Shirt1.png')))
+                ),
+              ),
+
+              //shirt 2
+              Positioned(
+                left: -20,
+                top: 100,
+                bottom: 300,
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/icons/shirt2.png')))
+                ),
+              ),
+
+              //shoes 1
+              Positioned(
+                left: 80,
+                top: 100,
+                bottom: 300,
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/icons/shoes1.png')))
+                ),
+              ),
+
+              //shoes 2
+              Positioned(
+                left: 240,
+                top: 250,
+                bottom: 315,
+                child: Container(
+                    height: 150,
+                    width: 150,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/icons/shoes2.png')))
+                ),
+              )
             ],
           ),
 

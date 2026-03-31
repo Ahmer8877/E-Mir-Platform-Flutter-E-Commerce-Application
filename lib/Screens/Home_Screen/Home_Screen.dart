@@ -47,25 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
     //Scaffold this is root of this application
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Products', style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.white)),
-          backgroundColor: Colors.blue,
-          foregroundColor: Colors.black,
-          elevation: 0.5,
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.shopping_cart_outlined, color: Colors.white,),
-              onPressed: () {},
-            ),
-          ],
-        ),
 
-
-        body:
-
-        Padding(
+        body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView(
             children: [
@@ -83,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     context.read<ProductProvider>().searchProducts(value);
                   },
                   decoration: InputDecoration(
-                    hintText: "Search Anyway......",
+                    hintText: "Search Anyway.......",
                     hintStyle: TextStyle(color: Colors.black),
                     prefixIcon: Icon(Icons.search),
                     suffixIcon: search.text.isNotEmpty
@@ -277,6 +260,8 @@ class _HomeScreenState extends State<HomeScreen> {
         )
     );
   }
+
+  //card widgets
 
   Widget _productCard(ProductModel product, ProductProvider provider) {
     final discount = (((product.originalPrice - product.price) /

@@ -57,7 +57,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
 
-                SizedBox(height: 30,),
                 //create the text form field for email and password
 
                 Form(
