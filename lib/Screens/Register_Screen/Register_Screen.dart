@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:provider/provider.dart';
@@ -163,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                         Consumer<MyAuthProvider>(
                           builder: (context,provider,child) {
-                            return provider.loading? Center(child: CircularProgressIndicator(),) :
+                            return provider.loading? Center(child: Lottie.asset('assets/animations/loading.json'),) :
                             ElevatedButton(
                                 onPressed: ()async {
                                   if(formkey.currentState!.validate()) {

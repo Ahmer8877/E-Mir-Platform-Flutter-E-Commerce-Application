@@ -45,7 +45,7 @@ class NotificationHelper with ChangeNotifier {
 
    Future<void> show() async{
 
-    AndroidNotificationDetails android=AndroidNotificationDetails('channelId', 'imp.. channel',silent: true);
+    AndroidNotificationDetails android=AndroidNotificationDetails('channelId', 'imp.. channel');
     DarwinNotificationDetails ios=DarwinNotificationDetails();
     NotificationDetails notificationDetails=NotificationDetails(
 

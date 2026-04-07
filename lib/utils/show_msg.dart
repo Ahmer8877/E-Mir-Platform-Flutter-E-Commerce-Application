@@ -8,6 +8,7 @@ void showMsg(String? msg){
 
   scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(content: Text(msg!),
       backgroundColor: Colors.green,
+    duration: Duration(seconds: 3),
   ));
 
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController Email=TextEditingController();
   TextEditingController Password=TextEditingController();
   GlobalKey<FormState> formkey=GlobalKey<FormState>();
+
   bool isHidden=true;
 
 
@@ -79,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   decoration: InputDecoration(
                                       hintText: 'Enter the Email',
                                       border: InputBorder.none,
-                                      prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
+                                      prefixIcon: Icon(Icons.email_outlined),
                                       suffixIcon: InkWell(
                                           onTap: (){
                                             Email.clear();
@@ -107,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   decoration: InputDecoration(
                                       hintText: 'Enter the Password',
                                       border: InputBorder.none,
-                                      prefixIcon: Icon(Icons.lock,color: Colors.black,),
+                                      prefixIcon: Icon(Icons.lock,),
                                       suffixIcon: IconButton(
                                           onPressed: (){
                                             setState(() {
@@ -140,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           Consumer<MyAuthProvider>(
                             builder: (context,provider,child) {
-                              return provider.loading? Center(child: CircularProgressIndicator(),):
+                              return provider.loading? Center(child: Lottie.asset('assets/animations/loading.json'),):
                               ElevatedButton(
                                   onPressed: () async{
                                     if(formkey.currentState!.validate()) {
@@ -271,62 +273,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-
-              //shirt 1
-              Positioned(
-                left: 240,
-                top: -20,
-                bottom: 600,
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/icons/Shirt1.png')))
-                ),
-              ),
-
-              //shirt 2
-              Positioned(
-                left: -20,
-                top: 100,
-                bottom: 300,
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/icons/shirt2.png')))
-                ),
-              ),
-
-              //shoes 1
-              Positioned(
-                left: 80,
-                top: 100,
-                bottom: 300,
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/icons/shoes1.png')))
-                ),
-              ),
-
-              //shoes 2
-              Positioned(
-                left: 240,
-                top: 250,
-                bottom: 315,
-                child: Container(
-                    height: 150,
-                    width: 150,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/icons/shoes2.png')))
-                ),
-              )
             ],
           ),
 

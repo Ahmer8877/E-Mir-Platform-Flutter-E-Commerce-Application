@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'NewsDetaild_screen.dart';
+import 'package:lottie/lottie.dart';
 import '../../Providers/News_provider/News_provider.dart';
 
 class mNewsScreen extends StatefulWidget {
@@ -31,8 +32,8 @@ class _mNewsScreenState extends State<mNewsScreen> {
 
           // Loading state
           if (newsProvider.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: Lottie.asset('assets/animations/loading.json',height: 70,width: 70),
             );
           }
 

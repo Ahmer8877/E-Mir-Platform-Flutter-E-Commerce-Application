@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../../Providers/product_provider/product_provider.dart';
@@ -219,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Consumer<ProductProvider>(
                 builder: (context, provider, child) {
                   if (provider.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return  Center(child: Lottie.asset('assets/animations/loading.json',height: 70,width: 70));
                   }
 
                   if (provider.products.isEmpty) {

@@ -2,13 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mir_e_platform/Providers/localNotification_provider/local_notification.dart';
 import 'package:mir_e_platform/main.dart';
 import 'package:mir_e_platform/utils/route_Helper.dart';
 import 'package:mir_e_platform/utils/show_msg.dart';
 import 'package:mir_e_platform/utils/showmsg_failure.dart';
 import 'package:provider/provider.dart';
-
 import '../profile_provider/profile_provider.dart';
 
 
@@ -22,12 +20,11 @@ class MyAuthProvider with ChangeNotifier{
 
   TextEditingController emailController = TextEditingController();
 
+  final service=FlutterBackgroundService();
+
   //fake loading
 
   bool loading=false;
-
-  final service= FlutterBackgroundService();
-
 
 
   // provider.login(Email.text, Password.text);
@@ -46,13 +43,15 @@ class MyAuthProvider with ChangeNotifier{
       showMsg('Login Successful');
       Navigator.pushNamedAndRemoveUntil(
           navigatorKey.currentContext!, RouteHelper.Main, (value) => false);
+      service.startService();
 
       //call local notification
-      await navigatorKey.currentContext!.read<NotificationHelper>().show();
-      //call schedule notification
-       await navigatorKey.currentContext!.read<NotificationHelper>().schedule();
+      // await navigatorKey.currentContext!.read<NotificationHelper>().show();
+      // //call schedule notification
+      //  await navigatorKey.currentContext!.read<NotificationHelper>().schedule();
 
-       service.startService();
+
+
     }on FirebaseAuthException catch(e){
       showMsgFailure(e.toString());
     } catch (e) {

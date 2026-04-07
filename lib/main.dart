@@ -1,4 +1,3 @@
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,19 +22,20 @@ final navigatorKey=GlobalKey<NavigatorState>();
 
 //background messaging handling on firebase
 
-Future<void> backgroundMessage(RemoteMessage message)async{
+Future<void> backgroundMessageFCM(RemoteMessage message)async{
 
   await Firebase.initializeApp();
   Provider.of<NotificationHelper>(navigatorKey.currentContext!,listen: false).show();
 }
 
 
+//Main root function
+
 void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
   //local notification initialization
-  NotificationHelper.initialize();
-
+ await NotificationHelper.initialize();
 
   //Firebase initialization tools code
   await Firebase.initializeApp(
@@ -50,7 +50,7 @@ void main() async{
     navigatorKey.currentContext!.read<NotificationHelper>().show();
   });
 
-  FirebaseMessaging.onBackgroundMessage(backgroundMessage);
+  FirebaseMessaging.onBackgroundMessage(backgroundMessageFCM);
 
   runApp(const MyApp());
 }

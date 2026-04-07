@@ -47,6 +47,7 @@ class _MainScreenState extends State<MainScreen> {
     "Cart"
   ];
 
+
   //create the all widget list in app
 
   final List<Widget> widgets=[HomeScreen(),mNewsScreen(),ProfileScreen(),CartScreen()];
@@ -57,6 +58,7 @@ class _MainScreenState extends State<MainScreen> {
 
     //this is the root of application and provide interface
     return Scaffold(
+      backgroundColor: Colors.white,
         key: globalKey,
         //set the app bar(code)
 
@@ -216,6 +218,10 @@ class _MainScreenState extends State<MainScreen> {
                 subtitle: Text('    version 1.00v'),
               ),
 
+              SizedBox(height: 20,),
+
+
+
               SizedBox(height: 330,),
 
 
@@ -229,6 +235,7 @@ class _MainScreenState extends State<MainScreen> {
                             context: context,
                             builder: (context) =>
                                 AlertDialog(
+                                  backgroundColor: Colors.white,
                                   title: Text('SignOut'),
                                   content: Text('Are you sure?'),
 
