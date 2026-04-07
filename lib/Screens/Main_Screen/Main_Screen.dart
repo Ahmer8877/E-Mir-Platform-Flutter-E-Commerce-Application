@@ -5,6 +5,7 @@ import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
 import 'package:mir_e_platform/Providers/darkTheme_provider/dark_theme.dart';
 import 'package:mir_e_platform/Screens/Cart_Screen/Cart_Screen.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../Providers/profile_provider/profile_provider.dart';
 import '../Home_Screen/Home_Screen.dart';
 import '../Profile_Screen/Profile_Screen.dart';
@@ -47,6 +48,13 @@ class _MainScreenState extends State<MainScreen> {
     "Cart"
   ];
 
+  //whatsApp Link
+
+  Uri whatsAppUri=Uri.parse('https://wa.me/qr/ECJDRCYFI53AA1');
+
+  //phone uri
+
+  Uri callUri=Uri(scheme: 'tel',path: '03095342344');
 
   //create the all widget list in app
 
@@ -186,7 +194,6 @@ class _MainScreenState extends State<MainScreen> {
                           onChanged: (value){
                           provider.switchTheme(value!);
                           },
-
                         items: [
                           DropdownMenuItem(
                             value: ThemeMode.light,
@@ -209,7 +216,22 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
 
-              SizedBox(height: 30,),
+              SizedBox(height: 20,),
+
+              //contact us in list Tile
+
+              ListTile(
+                onTap: (){
+                  launchUrl(whatsAppUri);
+                },
+                title: Text('Contact Us'),
+                leading: Image(image: AssetImage('assets/icons/whatsApp.png'),height: 30,width: 30,),
+                trailing: InkWell(
+                    onTap: (){
+                      launchUrl(callUri);
+                    },
+                    child: Image(image: AssetImage('assets/icons/call.png'),height: 30,width: 30,)),
+              ),
 
               //About section
 
@@ -218,18 +240,13 @@ class _MainScreenState extends State<MainScreen> {
                 subtitle: Text('    version 1.00v'),
               ),
 
-              SizedBox(height: 20,),
-
-
-
-              SizedBox(height: 330,),
-
+              SizedBox(height: 150,),
 
               //logout button code with dialog box
 
               Consumer<MyAuthProvider>(
                 builder: (context,provider,child) {
-                  return OutlinedButton.icon(
+                  return TextButton.icon(
                       onPressed: () {
                         showDialog(
                             context: context,
