@@ -52,9 +52,9 @@ class _MainScreenState extends State<MainScreen> {
 
   Uri whatsAppUri=Uri.parse('https://wa.me/qr/ECJDRCYFI53AA1');
 
-  //phone uri
+  //mail uri
 
-  Uri callUri=Uri(scheme: 'tel',path: '03095342344');
+  Uri mailUri=Uri(scheme: 'mailto',path: 'rajpootahmer786@gmail.com',query: 'subject: Example Subject & Symbols are allowed!');
 
   //create the all widget list in app
 
@@ -190,6 +190,7 @@ class _MainScreenState extends State<MainScreen> {
                   Consumer<ThemeProvider>(
                     builder: (context,provider,child) {
                       return DropdownButton<ThemeMode>(
+                        underline: SizedBox(),
                         value: provider.themeMode,
                           onChanged: (value){
                           provider.switchTheme(value!);
@@ -220,18 +221,15 @@ class _MainScreenState extends State<MainScreen> {
 
               //contact us in list Tile
 
-              ListTile(
-                onTap: (){
-                  launchUrl(whatsAppUri);
-                },
-                title: Text('Contact Us'),
-                leading: Image(image: AssetImage('assets/icons/whatsApp.png'),height: 30,width: 30,),
-                trailing: InkWell(
-                    onTap: (){
-                      launchUrl(callUri);
-                    },
-                    child: Image(image: AssetImage('assets/icons/call.png'),height: 30,width: 30,)),
-              ),
+             ListTile(
+               title: Text('Contact Us'),
+               leading: Image(image: AssetImage('assets/icons/whatsApp.png'),height: 30,width: 30,),
+               trailing: InkWell(
+                   onTap: (){
+                     launchUrl(mailUri);
+                   },
+                   child: Image(image: AssetImage('assets/icons/mail.png'),height: 40,width: 40,)),
+             ),
 
               //About section
 

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:video_player/video_player.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -11,47 +11,75 @@ class CartScreen extends StatefulWidget {
 }
 class _CartScreenState extends State<CartScreen> {
 
-  WebViewController controller=WebViewController();
-  int progress=1;
+  late VideoPlayerController controller;
 
-  @override
+ @override
   void initState() {
-    controller.setNavigationDelegate(NavigationDelegate(
-      onProgress: (value){
-        setState(() {
-          progress=value;
-        });
-      }
-    ));
-    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    controller.loadRequest(Uri.parse('https://v0-ahmir-portf.vercel.app/'));
+   controller=VideoPlayerController.asset('assets/animations/video1.mp4');
+
+     controller.initialize();
+     setState(() {
+
+     });
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () async {
-              if(await controller.canGoBack()){
-                controller.goBack();
-              }
-            },
-            icon: Icon(CupertinoIcons.back)
-        ),
-      ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
-          Visibility(visible: !(progress ==0 || progress ==100),
-              child: LinearProgressIndicator(value: progress/100,color: Colors.indigo,)),
-          Expanded(child:
-          WebViewWidget(controller: controller)
+          Stack(
+            alignment: AlignmentDirectional.bottomStart,
+            children: [
+              AspectRatio(
+                aspectRatio: controller.value.aspectRatio,
+                  child: VideoPlayer(controller)
+              ),
+              VideoProgressIndicator(
+                controller,
+                allowScrubbing: true,
+                colors: VideoProgressColors(bufferedColor: Colors.white),
+              )
+            ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+              IconButton(
+                  onPressed: (){
+                    Duration current=controller.value.position;
+                    controller.seekTo(current - Duration(seconds: 10));
+                  },
+                  icon: Icon(CupertinoIcons.gobackward_10)
+              ),
+              IconButton(
+                  onPressed: ()async{
+                    if(controller.value.isPlaying){
+                      await controller.pause();
+                    }else{
+                      await controller.play();
+                    }
+                    setState(() {
+
+                    });
+                  },
+                  icon: Icon( controller.value.isPlaying? CupertinoIcons.pause:CupertinoIcons.play )
+              ),
+              IconButton(
+                  onPressed: ()async{
+                    Duration current=controller.value.position;
+                   await controller.seekTo(current+ Duration(seconds: 10));
+                  },
+                  icon: Icon(CupertinoIcons.goforward_10)
+              )
+            ],
+          )
         ],
       ),
     );
   }
 }
+
