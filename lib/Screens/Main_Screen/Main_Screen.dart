@@ -222,6 +222,9 @@ class _MainScreenState extends State<MainScreen> {
               //contact us in list Tile
 
              ListTile(
+               onTap: (){
+                 launchUrl(whatsAppUri);
+               },
                title: Text('Contact Us'),
                leading: Image(image: AssetImage('assets/icons/whatsApp.png'),height: 30,width: 30,),
                trailing: InkWell(
