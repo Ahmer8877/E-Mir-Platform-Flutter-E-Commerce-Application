@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mir_e_platform/Providers/ProductCatogery_APIs/Electronics_provider.dart';
 import 'package:mir_e_platform/Providers/auth/auth_provider.data.dart';
 import 'package:mir_e_platform/Providers/darkTheme_provider/dark_theme.dart';
 import 'package:mir_e_platform/Providers/localNotification_provider/local_notification.dart';
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => NotificationHelper()),
+        ChangeNotifierProvider(create: (_) => ElectronicsProvider()),
       ],
 
       child: Consumer<ThemeProvider>(

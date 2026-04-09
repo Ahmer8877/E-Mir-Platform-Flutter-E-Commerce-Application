@@ -164,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                         Consumer<MyAuthProvider>(
                           builder: (context,provider,child) {
-                            return provider.loading? Center(child: Lottie.asset('assets/animations/loading.json'),) :
+                            return provider.loading? Center(heightFactor: 30,widthFactor: 30,child: Lottie.asset('assets/animations/loading.json'),) :
                             ElevatedButton(
                                 onPressed: ()async {
                                   if(formkey.currentState!.validate()) {

@@ -231,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icon(Icons.search_off, size: 60,
                               color: Colors.grey),
                           SizedBox(height: 12),
-                          Text('Koi product nahi mila',
+                          Text('Not Found',
                               style: TextStyle(color: Colors.grey)),
                         ],
                       ),

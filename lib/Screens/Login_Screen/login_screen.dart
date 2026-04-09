@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           Consumer<MyAuthProvider>(
                             builder: (context,provider,child) {
-                              return provider.loading? Center(child: Lottie.asset('assets/animations/loading.json'),):
+                              return provider.loading? Center(widthFactor: 30,heightFactor: 30,child: Lottie.asset('assets/animations/loading.json'),):
                               ElevatedButton(
                                   onPressed: () async{
                                     if(formkey.currentState!.validate()) {
